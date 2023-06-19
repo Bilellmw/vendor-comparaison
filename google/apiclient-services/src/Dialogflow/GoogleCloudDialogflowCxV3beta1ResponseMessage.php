@@ -19,6 +19,10 @@ namespace Google\Service\Dialogflow;
 
 class GoogleCloudDialogflowCxV3beta1ResponseMessage extends \Google\Model
 {
+  /**
+   * @var string
+   */
+  public $channel;
   protected $conversationSuccessType = GoogleCloudDialogflowCxV3beta1ResponseMessageConversationSuccess::class;
   protected $conversationSuccessDataType = '';
   protected $endInteractionType = GoogleCloudDialogflowCxV3beta1ResponseMessageEndInteraction::class;
@@ -29,12 +33,31 @@ class GoogleCloudDialogflowCxV3beta1ResponseMessage extends \Google\Model
   protected $mixedAudioDataType = '';
   protected $outputAudioTextType = GoogleCloudDialogflowCxV3beta1ResponseMessageOutputAudioText::class;
   protected $outputAudioTextDataType = '';
+  /**
+   * @var array[]
+   */
   public $payload;
   protected $playAudioType = GoogleCloudDialogflowCxV3beta1ResponseMessagePlayAudio::class;
   protected $playAudioDataType = '';
+  protected $telephonyTransferCallType = GoogleCloudDialogflowCxV3beta1ResponseMessageTelephonyTransferCall::class;
+  protected $telephonyTransferCallDataType = '';
   protected $textType = GoogleCloudDialogflowCxV3beta1ResponseMessageText::class;
   protected $textDataType = '';
 
+  /**
+   * @param string
+   */
+  public function setChannel($channel)
+  {
+    $this->channel = $channel;
+  }
+  /**
+   * @return string
+   */
+  public function getChannel()
+  {
+    return $this->channel;
+  }
   /**
    * @param GoogleCloudDialogflowCxV3beta1ResponseMessageConversationSuccess
    */
@@ -105,10 +128,16 @@ class GoogleCloudDialogflowCxV3beta1ResponseMessage extends \Google\Model
   {
     return $this->outputAudioText;
   }
+  /**
+   * @param array[]
+   */
   public function setPayload($payload)
   {
     $this->payload = $payload;
   }
+  /**
+   * @return array[]
+   */
   public function getPayload()
   {
     return $this->payload;
@@ -126,6 +155,20 @@ class GoogleCloudDialogflowCxV3beta1ResponseMessage extends \Google\Model
   public function getPlayAudio()
   {
     return $this->playAudio;
+  }
+  /**
+   * @param GoogleCloudDialogflowCxV3beta1ResponseMessageTelephonyTransferCall
+   */
+  public function setTelephonyTransferCall(GoogleCloudDialogflowCxV3beta1ResponseMessageTelephonyTransferCall $telephonyTransferCall)
+  {
+    $this->telephonyTransferCall = $telephonyTransferCall;
+  }
+  /**
+   * @return GoogleCloudDialogflowCxV3beta1ResponseMessageTelephonyTransferCall
+   */
+  public function getTelephonyTransferCall()
+  {
+    return $this->telephonyTransferCall;
   }
   /**
    * @param GoogleCloudDialogflowCxV3beta1ResponseMessageText

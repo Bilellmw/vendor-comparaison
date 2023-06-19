@@ -26,14 +26,14 @@ use Google\Service\AccessContextManager\Operation;
  * Typical usage is:
  *  <code>
  *   $accesscontextmanagerService = new Google\Service\AccessContextManager(...);
- *   $gcpUserAccessBindings = $accesscontextmanagerService->gcpUserAccessBindings;
+ *   $gcpUserAccessBindings = $accesscontextmanagerService->organizations_gcpUserAccessBindings;
  *  </code>
  */
 class OrganizationsGcpUserAccessBindings extends \Google\Service\Resource
 {
   /**
    * Creates a GcpUserAccessBinding. If the client specifies a name, the server
-   * will ignore it. Fails if a resource already exists with the same group_key.
+   * ignores it. Fails if a resource already exists with the same group_key.
    * Completion of this long-running operation does not necessarily signify that
    * the new binding is deployed onto all affected users, which may take more
    * time. (gcpUserAccessBindings.create)
@@ -117,7 +117,8 @@ class OrganizationsGcpUserAccessBindings extends \Google\Service\Resource
    *
    * @opt_param string updateMask Required. Only the fields specified in this mask
    * are updated. Because name and group_key cannot be changed, update_mask is
-   * required and must always be: update_mask { paths: "access_levels" }
+   * required and may only contain the following fields: `access_levels`,
+   * `dry_run_access_levels`. update_mask { paths: "access_levels" }
    * @return Operation
    */
   public function patch($name, GcpUserAccessBinding $postBody, $optParams = [])

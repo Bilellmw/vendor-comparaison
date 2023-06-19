@@ -30,7 +30,7 @@ use Google\Service\VMMigrationService\StartMigrationRequest;
  * Typical usage is:
  *  <code>
  *   $vmmigrationService = new Google\Service\VMMigrationService(...);
- *   $migratingVms = $vmmigrationService->migratingVms;
+ *   $migratingVms = $vmmigrationService->projects_locations_sources_migratingVms;
  *  </code>
  */
 class ProjectsLocationsSourcesMigratingVms extends \Google\Service\Resource
@@ -47,7 +47,7 @@ class ProjectsLocationsSourcesMigratingVms extends \Google\Service\Resource
    * unique request ID so that if you must retry your request, the server will
    * know to ignore the request if it has already been completed. The server will
    * guarantee that for at least 60 minutes since the first request. For example,
-   * consider a situation where you make an initial request and t he request times
+   * consider a situation where you make an initial request and the request times
    * out. If you make the request again with the same request ID, the server can
    * check if original operation with the same request ID was received, and if so,
    * will ignore the second request. This prevents clients from accidentally
@@ -96,6 +96,8 @@ class ProjectsLocationsSourcesMigratingVms extends \Google\Service\Resource
    *
    * @param string $name Required. The name of the MigratingVm.
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param string view Optional. The level of details of the migrating VM.
    * @return MigratingVm
    */
   public function get($name, $optParams = [])
@@ -122,6 +124,7 @@ class ProjectsLocationsSourcesMigratingVms extends \Google\Service\Resource
    * `ListMigratingVms` call. Provide this to retrieve the subsequent page. When
    * paginating, all other parameters provided to `ListMigratingVms` must match
    * the call that provided the page token.
+   * @opt_param string view Optional. The level of details of each migrating VM.
    * @return ListMigratingVmsResponse
    */
   public function listProjectsLocationsSourcesMigratingVms($parent, $optParams = [])
@@ -141,7 +144,7 @@ class ProjectsLocationsSourcesMigratingVms extends \Google\Service\Resource
    * unique request ID so that if you must retry your request, the server will
    * know to ignore the request if it has already been completed. The server will
    * guarantee that for at least 60 minutes since the first request. For example,
-   * consider a situation where you make an initial request and t he request times
+   * consider a situation where you make an initial request and the request times
    * out. If you make the request again with the same request ID, the server can
    * check if original operation with the same request ID was received, and if so,
    * will ignore the second request. This prevents clients from accidentally

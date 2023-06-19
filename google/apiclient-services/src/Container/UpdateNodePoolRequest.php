@@ -20,34 +20,128 @@ namespace Google\Service\Container;
 class UpdateNodePoolRequest extends \Google\Collection
 {
   protected $collection_key = 'locations';
+  /**
+   * @var string
+   */
   public $clusterId;
+  protected $confidentialNodesType = ConfidentialNodes::class;
+  protected $confidentialNodesDataType = '';
+  /**
+   * @var string
+   */
+  public $etag;
+  protected $fastSocketType = FastSocket::class;
+  protected $fastSocketDataType = '';
   protected $gcfsConfigType = GcfsConfig::class;
   protected $gcfsConfigDataType = '';
   protected $gvnicType = VirtualNIC::class;
   protected $gvnicDataType = '';
+  /**
+   * @var string
+   */
   public $imageType;
   protected $kubeletConfigType = NodeKubeletConfig::class;
   protected $kubeletConfigDataType = '';
+  protected $labelsType = NodeLabels::class;
+  protected $labelsDataType = '';
   protected $linuxNodeConfigType = LinuxNodeConfig::class;
   protected $linuxNodeConfigDataType = '';
+  /**
+   * @var string[]
+   */
   public $locations;
+  protected $loggingConfigType = NodePoolLoggingConfig::class;
+  protected $loggingConfigDataType = '';
+  /**
+   * @var string
+   */
   public $name;
+  protected $nodeNetworkConfigType = NodeNetworkConfig::class;
+  protected $nodeNetworkConfigDataType = '';
+  /**
+   * @var string
+   */
   public $nodePoolId;
+  /**
+   * @var string
+   */
   public $nodeVersion;
+  /**
+   * @var string
+   */
   public $projectId;
+  protected $resourceLabelsType = ResourceLabels::class;
+  protected $resourceLabelsDataType = '';
+  protected $tagsType = NetworkTags::class;
+  protected $tagsDataType = '';
+  protected $taintsType = NodeTaints::class;
+  protected $taintsDataType = '';
   protected $upgradeSettingsType = UpgradeSettings::class;
   protected $upgradeSettingsDataType = '';
+  protected $windowsNodeConfigType = WindowsNodeConfig::class;
+  protected $windowsNodeConfigDataType = '';
   protected $workloadMetadataConfigType = WorkloadMetadataConfig::class;
   protected $workloadMetadataConfigDataType = '';
+  /**
+   * @var string
+   */
   public $zone;
 
+  /**
+   * @param string
+   */
   public function setClusterId($clusterId)
   {
     $this->clusterId = $clusterId;
   }
+  /**
+   * @return string
+   */
   public function getClusterId()
   {
     return $this->clusterId;
+  }
+  /**
+   * @param ConfidentialNodes
+   */
+  public function setConfidentialNodes(ConfidentialNodes $confidentialNodes)
+  {
+    $this->confidentialNodes = $confidentialNodes;
+  }
+  /**
+   * @return ConfidentialNodes
+   */
+  public function getConfidentialNodes()
+  {
+    return $this->confidentialNodes;
+  }
+  /**
+   * @param string
+   */
+  public function setEtag($etag)
+  {
+    $this->etag = $etag;
+  }
+  /**
+   * @return string
+   */
+  public function getEtag()
+  {
+    return $this->etag;
+  }
+  /**
+   * @param FastSocket
+   */
+  public function setFastSocket(FastSocket $fastSocket)
+  {
+    $this->fastSocket = $fastSocket;
+  }
+  /**
+   * @return FastSocket
+   */
+  public function getFastSocket()
+  {
+    return $this->fastSocket;
   }
   /**
    * @param GcfsConfig
@@ -77,10 +171,16 @@ class UpdateNodePoolRequest extends \Google\Collection
   {
     return $this->gvnic;
   }
+  /**
+   * @param string
+   */
   public function setImageType($imageType)
   {
     $this->imageType = $imageType;
   }
+  /**
+   * @return string
+   */
   public function getImageType()
   {
     return $this->imageType;
@@ -100,6 +200,20 @@ class UpdateNodePoolRequest extends \Google\Collection
     return $this->kubeletConfig;
   }
   /**
+   * @param NodeLabels
+   */
+  public function setLabels(NodeLabels $labels)
+  {
+    $this->labels = $labels;
+  }
+  /**
+   * @return NodeLabels
+   */
+  public function getLabels()
+  {
+    return $this->labels;
+  }
+  /**
    * @param LinuxNodeConfig
    */
   public function setLinuxNodeConfig(LinuxNodeConfig $linuxNodeConfig)
@@ -113,45 +227,145 @@ class UpdateNodePoolRequest extends \Google\Collection
   {
     return $this->linuxNodeConfig;
   }
+  /**
+   * @param string[]
+   */
   public function setLocations($locations)
   {
     $this->locations = $locations;
   }
+  /**
+   * @return string[]
+   */
   public function getLocations()
   {
     return $this->locations;
   }
+  /**
+   * @param NodePoolLoggingConfig
+   */
+  public function setLoggingConfig(NodePoolLoggingConfig $loggingConfig)
+  {
+    $this->loggingConfig = $loggingConfig;
+  }
+  /**
+   * @return NodePoolLoggingConfig
+   */
+  public function getLoggingConfig()
+  {
+    return $this->loggingConfig;
+  }
+  /**
+   * @param string
+   */
   public function setName($name)
   {
     $this->name = $name;
   }
+  /**
+   * @return string
+   */
   public function getName()
   {
     return $this->name;
   }
+  /**
+   * @param NodeNetworkConfig
+   */
+  public function setNodeNetworkConfig(NodeNetworkConfig $nodeNetworkConfig)
+  {
+    $this->nodeNetworkConfig = $nodeNetworkConfig;
+  }
+  /**
+   * @return NodeNetworkConfig
+   */
+  public function getNodeNetworkConfig()
+  {
+    return $this->nodeNetworkConfig;
+  }
+  /**
+   * @param string
+   */
   public function setNodePoolId($nodePoolId)
   {
     $this->nodePoolId = $nodePoolId;
   }
+  /**
+   * @return string
+   */
   public function getNodePoolId()
   {
     return $this->nodePoolId;
   }
+  /**
+   * @param string
+   */
   public function setNodeVersion($nodeVersion)
   {
     $this->nodeVersion = $nodeVersion;
   }
+  /**
+   * @return string
+   */
   public function getNodeVersion()
   {
     return $this->nodeVersion;
   }
+  /**
+   * @param string
+   */
   public function setProjectId($projectId)
   {
     $this->projectId = $projectId;
   }
+  /**
+   * @return string
+   */
   public function getProjectId()
   {
     return $this->projectId;
+  }
+  /**
+   * @param ResourceLabels
+   */
+  public function setResourceLabels(ResourceLabels $resourceLabels)
+  {
+    $this->resourceLabels = $resourceLabels;
+  }
+  /**
+   * @return ResourceLabels
+   */
+  public function getResourceLabels()
+  {
+    return $this->resourceLabels;
+  }
+  /**
+   * @param NetworkTags
+   */
+  public function setTags(NetworkTags $tags)
+  {
+    $this->tags = $tags;
+  }
+  /**
+   * @return NetworkTags
+   */
+  public function getTags()
+  {
+    return $this->tags;
+  }
+  /**
+   * @param NodeTaints
+   */
+  public function setTaints(NodeTaints $taints)
+  {
+    $this->taints = $taints;
+  }
+  /**
+   * @return NodeTaints
+   */
+  public function getTaints()
+  {
+    return $this->taints;
   }
   /**
    * @param UpgradeSettings
@@ -168,6 +382,20 @@ class UpdateNodePoolRequest extends \Google\Collection
     return $this->upgradeSettings;
   }
   /**
+   * @param WindowsNodeConfig
+   */
+  public function setWindowsNodeConfig(WindowsNodeConfig $windowsNodeConfig)
+  {
+    $this->windowsNodeConfig = $windowsNodeConfig;
+  }
+  /**
+   * @return WindowsNodeConfig
+   */
+  public function getWindowsNodeConfig()
+  {
+    return $this->windowsNodeConfig;
+  }
+  /**
    * @param WorkloadMetadataConfig
    */
   public function setWorkloadMetadataConfig(WorkloadMetadataConfig $workloadMetadataConfig)
@@ -181,10 +409,16 @@ class UpdateNodePoolRequest extends \Google\Collection
   {
     return $this->workloadMetadataConfig;
   }
+  /**
+   * @param string
+   */
   public function setZone($zone)
   {
     $this->zone = $zone;
   }
+  /**
+   * @return string
+   */
   public function getZone()
   {
     return $this->zone;

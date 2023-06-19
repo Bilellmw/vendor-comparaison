@@ -114,16 +114,16 @@ class DoctrineExtractor implements PropertyListExtractorInterface, PropertyTypeE
                     $fieldName = $associationMapping['indexBy'];
                     if (null === ($typeOfField = $subMetadata->getTypeOfField($fieldName))) {
                         $fieldName = $subMetadata->getFieldForColumn($associationMapping['indexBy']);
-                        //Not a property, maybe a column name?
+                        // Not a property, maybe a column name?
                         if (null === ($typeOfField = $subMetadata->getTypeOfField($fieldName))) {
-                            //Maybe the column name is the association join column?
+                            // Maybe the column name is the association join column?
                             $associationMapping = $subMetadata->getAssociationMapping($fieldName);
 
                             /** @var ClassMetadataInfo $subMetadata */
                             $indexProperty = $subMetadata->getSingleAssociationReferencedJoinColumnName($fieldName);
                             $subMetadata = $this->entityManager ? $this->entityManager->getClassMetadata($associationMapping['targetEntity']) : $this->classMetadataFactory->getMetadataFor($associationMapping['targetEntity']);
 
-                            //Not a property, maybe a column name?
+                            // Not a property, maybe a column name?
                             if (null === ($typeOfField = $subMetadata->getTypeOfField($indexProperty))) {
                                 $fieldName = $subMetadata->getFieldForColumn($indexProperty);
                                 $typeOfField = $subMetadata->getTypeOfField($fieldName);
@@ -159,6 +159,10 @@ class DoctrineExtractor implements PropertyListExtractorInterface, PropertyTypeE
             }
 
             $nullable = $metadata instanceof ClassMetadataInfo && $metadata->isNullable($property);
+            $enumType = null;
+            if (null !== $enumClass = $metadata->getFieldMapping($property)['enumType'] ?? null) {
+                $enumType = new Type(Type::BUILTIN_TYPE_OBJECT, $nullable, $enumClass);
+            }
 
             switch ($builtinType) {
                 case Type::BUILTIN_TYPE_OBJECT:
@@ -189,11 +193,23 @@ class DoctrineExtractor implements PropertyListExtractorInterface, PropertyTypeE
                         case self::$useDeprecatedConstants ? DBALType::TARRAY : Types::ARRAY:
                         // no break
                         case 'json_array':
+                            // return null if $enumType is set, because we can't determine if collectionKeyType is string or int
+                            if ($enumType) {
+                                return null;
+                            }
+
                             return [new Type(Type::BUILTIN_TYPE_ARRAY, $nullable, null, true)];
 
                         case self::$useDeprecatedConstants ? DBALType::SIMPLE_ARRAY : Types::SIMPLE_ARRAY:
-                            return [new Type(Type::BUILTIN_TYPE_ARRAY, $nullable, null, true, new Type(Type::BUILTIN_TYPE_INT), new Type(Type::BUILTIN_TYPE_STRING))];
+                            return [new Type(Type::BUILTIN_TYPE_ARRAY, $nullable, null, true, new Type(Type::BUILTIN_TYPE_INT), $enumType ?? new Type(Type::BUILTIN_TYPE_STRING))];
                     }
+                    break;
+                case Type::BUILTIN_TYPE_INT:
+                case Type::BUILTIN_TYPE_STRING:
+                    if ($enumType) {
+                        return [$enumType];
+                    }
+                    break;
             }
 
             return [new Type($builtinType, $nullable)];
@@ -230,7 +246,7 @@ class DoctrineExtractor implements PropertyListExtractorInterface, PropertyTypeE
     {
         try {
             return $this->entityManager ? $this->entityManager->getClassMetadata($class) : $this->classMetadataFactory->getMetadataFor($class);
-        } catch (MappingException | OrmMappingException $exception) {
+        } catch (MappingException|OrmMappingException $exception) {
             return null;
         }
     }

@@ -27,7 +27,7 @@ use Google\Client;
  *
  * <p>
  * For more information about this service, see the API
- * <a href="https://cloud.google.com/cloud-provider-access-management/access-approval/docs" target="_blank">Documentation</a>
+ * <a href="https://cloud.google.com/assured-workloads/access-approval/docs" target="_blank">Documentation</a>
  * </p>
  *
  * @author Google, Inc.
@@ -78,6 +78,16 @@ class AccessApproval extends \Google\Service
                 ],
               ],
             ],'getAccessApprovalSettings' => [
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'getServiceAccount' => [
               'path' => 'v1/{+name}',
               'httpMethod' => 'GET',
               'parameters' => [
@@ -141,6 +151,16 @@ class AccessApproval extends \Google\Service
                   'required' => true,
                 ],
               ],
+            ],'invalidate' => [
+              'path' => 'v1/{+name}:invalidate',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
             ],'list' => [
               'path' => 'v1/{+parent}/approvalRequests',
               'httpMethod' => 'GET',
@@ -184,6 +204,16 @@ class AccessApproval extends \Google\Service
                 ],
               ],
             ],'getAccessApprovalSettings' => [
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'getServiceAccount' => [
               'path' => 'v1/{+name}',
               'httpMethod' => 'GET',
               'parameters' => [
@@ -247,6 +277,16 @@ class AccessApproval extends \Google\Service
                   'required' => true,
                 ],
               ],
+            ],'invalidate' => [
+              'path' => 'v1/{+name}:invalidate',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
             ],'list' => [
               'path' => 'v1/{+parent}/approvalRequests',
               'httpMethod' => 'GET',
@@ -290,6 +330,16 @@ class AccessApproval extends \Google\Service
                 ],
               ],
             ],'getAccessApprovalSettings' => [
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'getServiceAccount' => [
               'path' => 'v1/{+name}',
               'httpMethod' => 'GET',
               'parameters' => [
@@ -346,6 +396,16 @@ class AccessApproval extends \Google\Service
             ],'get' => [
               'path' => 'v1/{+name}',
               'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'invalidate' => [
+              'path' => 'v1/{+name}:invalidate',
+              'httpMethod' => 'POST',
               'parameters' => [
                 'name' => [
                   'location' => 'path',

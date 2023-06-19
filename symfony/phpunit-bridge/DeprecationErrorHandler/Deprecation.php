@@ -37,6 +37,7 @@ class Deprecation
 
     private $trace = [];
     private $message;
+    private $languageDeprecation;
     private $originClass;
     private $originMethod;
     private $triggeringFile;
@@ -56,8 +57,9 @@ class Deprecation
     /**
      * @param string $message
      * @param string $file
+     * @param bool   $languageDeprecation
      */
-    public function __construct($message, array $trace, $file)
+    public function __construct($message, array $trace, $file, $languageDeprecation = false)
     {
         if (isset($trace[2]['function']) && 'trigger_deprecation' === $trace[2]['function']) {
             $file = $trace[2]['file'];
@@ -66,6 +68,7 @@ class Deprecation
 
         $this->trace = $trace;
         $this->message = $message;
+        $this->languageDeprecation = $languageDeprecation;
 
         $i = \count($trace);
         while (1 < $i && $this->lineShouldBeSkipped($trace[--$i])) {
@@ -87,7 +90,7 @@ class Deprecation
                     $this->getOriginalFilesStack();
                     array_splice($this->originalFilesStack, 0, $j, [$this->triggeringFile]);
 
-                    if (preg_match('/(?|"([^"]++)" that is deprecated|should implement method "(?:static )?([^:]++))/', $message, $m) || preg_match('/^(?:The|Method) "([^":]++)/', $message, $m)) {
+                    if (preg_match('/(?|"([^"]++)" that is deprecated|should implement method "(?:static )?([^:]++))/', $message, $m) || (false === strpos($message, '()" will return') && false === strpos($message, 'native return type declaration') && preg_match('/^(?:The|Method) "([^":]++)/', $message, $m))) {
                         $this->triggeringFile = (new \ReflectionClass($m[1]))->getFileName();
                         array_unshift($this->originalFilesStack, $this->triggeringFile);
                     }
@@ -102,8 +105,11 @@ class Deprecation
         }
 
         set_error_handler(function () {});
-        $parsedMsg = unserialize($this->message);
-        restore_error_handler();
+        try {
+            $parsedMsg = unserialize($this->message);
+        } finally {
+            restore_error_handler();
+        }
         if ($parsedMsg && isset($parsedMsg['deprecation'])) {
             $this->message = $parsedMsg['deprecation'];
             $this->originClass = $parsedMsg['class'];
@@ -236,7 +242,12 @@ class Deprecation
      */
     public function getType()
     {
-        if (self::PATH_TYPE_SELF === $pathType = $this->getPathType($this->triggeringFile)) {
+        $pathType = $this->getPathType($this->triggeringFile);
+        if ($this->languageDeprecation && self::PATH_TYPE_VENDOR === $pathType) {
+            // the triggering file must be used for language deprecations
+            return self::TYPE_INDIRECT;
+        }
+        if (self::PATH_TYPE_SELF === $pathType) {
             return self::TYPE_SELF;
         }
         if (self::PATH_TYPE_UNDETERMINED === $pathType) {
@@ -310,7 +321,7 @@ class Deprecation
     }
 
     /**
-     * @return string[] an array of paths
+     * @return string[]
      */
     private static function getVendors()
     {

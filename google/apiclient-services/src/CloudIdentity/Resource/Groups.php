@@ -22,6 +22,7 @@ use Google\Service\CloudIdentity\ListGroupsResponse;
 use Google\Service\CloudIdentity\LookupGroupNameResponse;
 use Google\Service\CloudIdentity\Operation;
 use Google\Service\CloudIdentity\SearchGroupsResponse;
+use Google\Service\CloudIdentity\SecuritySettings;
 
 /**
  * The "groups" collection of methods.
@@ -80,6 +81,24 @@ class Groups extends \Google\Service\Resource
     return $this->call('get', [$params], Group::class);
   }
   /**
+   * Get Security Settings (groups.getSecuritySettings)
+   *
+   * @param string $name Required. The security settings to retrieve. Format:
+   * `groups/{group_id}/securitySettings`
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string readMask Field-level read mask of which fields to return.
+   * "*" returns all fields. If not specified, all fields will be returned. May
+   * only contain the following field: `member_restriction`.
+   * @return SecuritySettings
+   */
+  public function getSecuritySettings($name, $optParams = [])
+  {
+    $params = ['name' => $name];
+    $params = array_merge($params, $optParams);
+    return $this->call('getSecuritySettings', [$params], SecuritySettings::class);
+  }
+  /**
    * Lists the `Group` resources under a customer or namespace.
    * (groups.listGroups)
    *
@@ -97,8 +116,9 @@ class Groups extends \Google\Service\Resource
    * @opt_param string parent Required. The parent resource under which to list
    * all `Group` resources. Must be of the form
    * `identitysources/{identity_source}` for external- identity-mapped groups or
-   * `customers/{customer}` for Google Groups. The `customer` must begin with "C"
-   * (for example, 'C046psxkn').
+   * `customers/{customer_id}` for Google Groups. The `customer_id` must begin
+   * with "C" (for example, 'C046psxkn'). [Find your customer ID.]
+   * (https://support.google.com/cloudidentity/answer/10070793)
    * @opt_param string view The level of detail to be returned. If unspecified,
    * defaults to `View.BASIC`.
    * @return ListGroupsResponse
@@ -168,12 +188,21 @@ class Groups extends \Google\Service\Resource
    * or 500 for `GroupView.FULL`.
    * @opt_param string pageToken The `next_page_token` value returned from a
    * previous search request, if any.
-   * @opt_param string query Required. The search query. Must be specified in
-   * [Common Expression Language](https://opensource.google/projects/cel). May
-   * only contain equality operators on the parent and inclusion operators on
-   * labels (e.g., `parent == 'customers/{customer}' &&
-   * 'cloudidentity.googleapis.com/groups.discussion_forum' in labels`). The
-   * `customer` must begin with "C" (for example, 'C046psxkn').
+   * @opt_param string query Required. The search query. * Must be specified in
+   * [Common Expression Language](https://opensource.google/projects/cel). * Must
+   * contain equality operators on the parent, e.g. `parent ==
+   * 'customers/{customer_id}'`. The `customer_id` must begin with "C" (for
+   * example, 'C046psxkn'). [Find your customer ID.]
+   * (https://support.google.com/cloudidentity/answer/10070793) * Can contain
+   * optional inclusion operators on `labels` such as
+   * `'cloudidentity.googleapis.com/groups.discussion_forum' in labels`). * Can
+   * contain an optional equality operator on `domain_name`. e.g. `domain_name ==
+   * 'abc.com'` * Can contain optional `startsWith/contains/equality` operators on
+   * `group_key`, e.g. `group_key.startsWith('dev')`, `group_key.contains('dev'),
+   * group_key == 'dev@abc.com'` * Can contain optional
+   * `startsWith/contains/equality` operators on `display_name`, such as
+   * `display_name.startsWith('dev')` , `display_name.contains('dev')`,
+   * `display_name == 'dev'`
    * @opt_param string view The level of detail to be returned. If unspecified,
    * defaults to `View.BASIC`.
    * @return SearchGroupsResponse
@@ -183,6 +212,24 @@ class Groups extends \Google\Service\Resource
     $params = [];
     $params = array_merge($params, $optParams);
     return $this->call('search', [$params], SearchGroupsResponse::class);
+  }
+  /**
+   * Update Security Settings (groups.updateSecuritySettings)
+   *
+   * @param string $name Output only. The resource name of the security settings.
+   * Shall be of the form `groups/{group_id}/securitySettings`.
+   * @param SecuritySettings $postBody
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string updateMask Required. The fully-qualified names of fields to
+   * update. May only contain the following field: `member_restriction.query`.
+   * @return Operation
+   */
+  public function updateSecuritySettings($name, SecuritySettings $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('updateSecuritySettings', [$params], Operation::class);
   }
 }
 

@@ -19,14 +19,55 @@ namespace Google\Service\OrgPolicyAPI;
 
 class GoogleCloudOrgpolicyV2Policy extends \Google\Model
 {
+  protected $alternateType = GoogleCloudOrgpolicyV2AlternatePolicySpec::class;
+  protected $alternateDataType = '';
+  protected $dryRunSpecType = GoogleCloudOrgpolicyV2PolicySpec::class;
+  protected $dryRunSpecDataType = '';
+  /**
+   * @var string
+   */
   public $name;
   protected $specType = GoogleCloudOrgpolicyV2PolicySpec::class;
   protected $specDataType = '';
 
+  /**
+   * @param GoogleCloudOrgpolicyV2AlternatePolicySpec
+   */
+  public function setAlternate(GoogleCloudOrgpolicyV2AlternatePolicySpec $alternate)
+  {
+    $this->alternate = $alternate;
+  }
+  /**
+   * @return GoogleCloudOrgpolicyV2AlternatePolicySpec
+   */
+  public function getAlternate()
+  {
+    return $this->alternate;
+  }
+  /**
+   * @param GoogleCloudOrgpolicyV2PolicySpec
+   */
+  public function setDryRunSpec(GoogleCloudOrgpolicyV2PolicySpec $dryRunSpec)
+  {
+    $this->dryRunSpec = $dryRunSpec;
+  }
+  /**
+   * @return GoogleCloudOrgpolicyV2PolicySpec
+   */
+  public function getDryRunSpec()
+  {
+    return $this->dryRunSpec;
+  }
+  /**
+   * @param string
+   */
   public function setName($name)
   {
     $this->name = $name;
   }
+  /**
+   * @return string
+   */
   public function getName()
   {
     return $this->name;

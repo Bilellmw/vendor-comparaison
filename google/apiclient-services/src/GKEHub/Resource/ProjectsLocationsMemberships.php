@@ -31,7 +31,7 @@ use Google\Service\GKEHub\TestIamPermissionsResponse;
  * Typical usage is:
  *  <code>
  *   $gkehubService = new Google\Service\GKEHub(...);
- *   $memberships = $gkehubService->memberships;
+ *   $memberships = $gkehubService->projects_locations_memberships;
  *  </code>
  */
 class ProjectsLocationsMemberships extends \Google\Service\Resource
@@ -82,6 +82,9 @@ class ProjectsLocationsMemberships extends \Google\Service\Resource
    * `projects/locations/memberships`.
    * @param array $optParams Optional parameters.
    *
+   * @opt_param bool force Optional. If set to true, any subresource from this
+   * Membership will also be deleted. Otherwise, the request will only work if the
+   * Membership has no subresource.
    * @opt_param string requestId Optional. A request ID to identify requests.
    * Specify a unique request ID so that if you must retry your request, the
    * server will know to ignore the request if it has already been completed. The
@@ -155,16 +158,21 @@ class ProjectsLocationsMemberships extends \Google\Service\Resource
    * resource exists and does not have a policy set. (memberships.getIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * requested. See the operation documentation for the appropriate value for this
-   * field.
+   * requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int options.requestedPolicyVersion Optional. The policy format
-   * version to be returned. Valid values are 0, 1, and 3. Requests specifying an
-   * invalid value will be rejected. Requests for policies with any conditional
-   * bindings must specify version 3. Policies without any conditional bindings
-   * may specify any valid value or leave the field unset. To learn which
-   * resources support conditions in their IAM policies, see the [IAM
+   * @opt_param int options.requestedPolicyVersion Optional. The maximum policy
+   * version that will be used to format the policy. Valid values are 0, 1, and 3.
+   * Requests specifying an invalid value will be rejected. Requests for policies
+   * with any conditional role bindings must specify version 3. Policies with no
+   * conditional role bindings may specify any valid value or leave the field
+   * unset. The policy in the response might use the policy version that you
+   * specified, or it might use a lower policy version. For example, if you
+   * specify version 3, but the policy has no conditional role bindings, the
+   * response uses version 1. To learn which resources support conditions in their
+   * IAM policies, see the [IAM
    * documentation](https://cloud.google.com/iam/help/conditions/resource-
    * policies).
    * @return Policy
@@ -181,6 +189,7 @@ class ProjectsLocationsMemberships extends \Google\Service\Resource
    *
    * @param string $parent Required. The parent (project and location) where the
    * Memberships will be listed. Specified in the format `projects/locations`.
+   * `projects/locations/-` list memberships in all the regions.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string filter Optional. Lists Memberships that match the filter
@@ -240,8 +249,9 @@ class ProjectsLocationsMemberships extends \Google\Service\Resource
    * `PERMISSION_DENIED` errors. (memberships.setIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * specified. See the operation documentation for the appropriate value for this
-   * field.
+   * specified. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -261,8 +271,9 @@ class ProjectsLocationsMemberships extends \Google\Service\Resource
    * (memberships.testIamPermissions)
    *
    * @param string $resource REQUIRED: The resource for which the policy detail is
-   * being requested. See the operation documentation for the appropriate value
-   * for this field.
+   * being requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return TestIamPermissionsResponse

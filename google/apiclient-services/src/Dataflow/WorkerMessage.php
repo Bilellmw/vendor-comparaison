@@ -19,7 +19,13 @@ namespace Google\Service\Dataflow;
 
 class WorkerMessage extends \Google\Model
 {
+  /**
+   * @var string[]
+   */
   public $labels;
+  /**
+   * @var string
+   */
   public $time;
   protected $workerHealthReportType = WorkerHealthReport::class;
   protected $workerHealthReportDataType = '';
@@ -31,19 +37,33 @@ class WorkerMessage extends \Google\Model
   protected $workerMetricsDataType = '';
   protected $workerShutdownNoticeType = WorkerShutdownNotice::class;
   protected $workerShutdownNoticeDataType = '';
+  protected $workerThreadScalingReportType = WorkerThreadScalingReport::class;
+  protected $workerThreadScalingReportDataType = '';
 
+  /**
+   * @param string[]
+   */
   public function setLabels($labels)
   {
     $this->labels = $labels;
   }
+  /**
+   * @return string[]
+   */
   public function getLabels()
   {
     return $this->labels;
   }
+  /**
+   * @param string
+   */
   public function setTime($time)
   {
     $this->time = $time;
   }
+  /**
+   * @return string
+   */
   public function getTime()
   {
     return $this->time;
@@ -117,6 +137,20 @@ class WorkerMessage extends \Google\Model
   public function getWorkerShutdownNotice()
   {
     return $this->workerShutdownNotice;
+  }
+  /**
+   * @param WorkerThreadScalingReport
+   */
+  public function setWorkerThreadScalingReport(WorkerThreadScalingReport $workerThreadScalingReport)
+  {
+    $this->workerThreadScalingReport = $workerThreadScalingReport;
+  }
+  /**
+   * @return WorkerThreadScalingReport
+   */
+  public function getWorkerThreadScalingReport()
+  {
+    return $this->workerThreadScalingReport;
   }
 }
 

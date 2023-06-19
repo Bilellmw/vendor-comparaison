@@ -19,30 +19,138 @@ namespace Google\Service\Document;
 
 class GoogleCloudDocumentaiV1ProcessorVersion extends \Google\Model
 {
+  /**
+   * @var string
+   */
   public $createTime;
+  protected $deprecationInfoType = GoogleCloudDocumentaiV1ProcessorVersionDeprecationInfo::class;
+  protected $deprecationInfoDataType = '';
+  /**
+   * @var string
+   */
   public $displayName;
+  protected $documentSchemaType = GoogleCloudDocumentaiV1DocumentSchema::class;
+  protected $documentSchemaDataType = '';
+  /**
+   * @var bool
+   */
+  public $googleManaged;
+  /**
+   * @var string
+   */
+  public $kmsKeyName;
+  /**
+   * @var string
+   */
+  public $kmsKeyVersionName;
   protected $latestEvaluationType = GoogleCloudDocumentaiV1EvaluationReference::class;
   protected $latestEvaluationDataType = '';
+  /**
+   * @var string
+   */
   public $name;
-  protected $schemaType = GoogleCloudDocumentaiV1Schema::class;
-  protected $schemaDataType = '';
+  /**
+   * @var string
+   */
   public $state;
 
+  /**
+   * @param string
+   */
   public function setCreateTime($createTime)
   {
     $this->createTime = $createTime;
   }
+  /**
+   * @return string
+   */
   public function getCreateTime()
   {
     return $this->createTime;
   }
+  /**
+   * @param GoogleCloudDocumentaiV1ProcessorVersionDeprecationInfo
+   */
+  public function setDeprecationInfo(GoogleCloudDocumentaiV1ProcessorVersionDeprecationInfo $deprecationInfo)
+  {
+    $this->deprecationInfo = $deprecationInfo;
+  }
+  /**
+   * @return GoogleCloudDocumentaiV1ProcessorVersionDeprecationInfo
+   */
+  public function getDeprecationInfo()
+  {
+    return $this->deprecationInfo;
+  }
+  /**
+   * @param string
+   */
   public function setDisplayName($displayName)
   {
     $this->displayName = $displayName;
   }
+  /**
+   * @return string
+   */
   public function getDisplayName()
   {
     return $this->displayName;
+  }
+  /**
+   * @param GoogleCloudDocumentaiV1DocumentSchema
+   */
+  public function setDocumentSchema(GoogleCloudDocumentaiV1DocumentSchema $documentSchema)
+  {
+    $this->documentSchema = $documentSchema;
+  }
+  /**
+   * @return GoogleCloudDocumentaiV1DocumentSchema
+   */
+  public function getDocumentSchema()
+  {
+    return $this->documentSchema;
+  }
+  /**
+   * @param bool
+   */
+  public function setGoogleManaged($googleManaged)
+  {
+    $this->googleManaged = $googleManaged;
+  }
+  /**
+   * @return bool
+   */
+  public function getGoogleManaged()
+  {
+    return $this->googleManaged;
+  }
+  /**
+   * @param string
+   */
+  public function setKmsKeyName($kmsKeyName)
+  {
+    $this->kmsKeyName = $kmsKeyName;
+  }
+  /**
+   * @return string
+   */
+  public function getKmsKeyName()
+  {
+    return $this->kmsKeyName;
+  }
+  /**
+   * @param string
+   */
+  public function setKmsKeyVersionName($kmsKeyVersionName)
+  {
+    $this->kmsKeyVersionName = $kmsKeyVersionName;
+  }
+  /**
+   * @return string
+   */
+  public function getKmsKeyVersionName()
+  {
+    return $this->kmsKeyVersionName;
   }
   /**
    * @param GoogleCloudDocumentaiV1EvaluationReference
@@ -58,32 +166,30 @@ class GoogleCloudDocumentaiV1ProcessorVersion extends \Google\Model
   {
     return $this->latestEvaluation;
   }
+  /**
+   * @param string
+   */
   public function setName($name)
   {
     $this->name = $name;
   }
+  /**
+   * @return string
+   */
   public function getName()
   {
     return $this->name;
   }
   /**
-   * @param GoogleCloudDocumentaiV1Schema
+   * @param string
    */
-  public function setSchema(GoogleCloudDocumentaiV1Schema $schema)
-  {
-    $this->schema = $schema;
-  }
-  /**
-   * @return GoogleCloudDocumentaiV1Schema
-   */
-  public function getSchema()
-  {
-    return $this->schema;
-  }
   public function setState($state)
   {
     $this->state = $state;
   }
+  /**
+   * @return string
+   */
   public function getState()
   {
     return $this->state;
